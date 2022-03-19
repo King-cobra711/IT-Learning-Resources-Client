@@ -21,7 +21,7 @@ const Layout = ({ children }) => {
           <a className="nav-link text-light btn btn-success">Submit a Link</a>
         </Link>
       </li>
-      {!isAuth() && (
+      {process.browser && !isAuth() && (
         <React.Fragment>
           <li className="nav-item">
             <Link href="/login">
@@ -35,21 +35,21 @@ const Layout = ({ children }) => {
           </li>
         </React.Fragment>
       )}
-      {isAuth() && isAuth().role === "admin" && (
+      {process.browser && isAuth() && isAuth().role === "admin" && (
         <li className="nav-item ms-auto">
           <Link href="/admin">
             <a className="nav-link text-light">{isAuth().name}</a>
           </Link>
         </li>
       )}
-      {isAuth() && isAuth().role === "subscriber" && (
+      {process.browser && isAuth() && isAuth().role === "subscriber" && (
         <li className="nav-item ms-auto">
           <Link href="/user">
             <a className="nav-link text-light">{isAuth().name}</a>
           </Link>
         </li>
       )}
-      {isAuth() && (
+      {process.browser && isAuth() && (
         <li className="nav-item">
           <a onClick={logout} className="nav-link text-light">
             Logout
