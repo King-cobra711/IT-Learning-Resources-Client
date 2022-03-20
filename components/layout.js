@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Head from "next/head";
 import Link from "next/link";
 import NProgress from "nprogress";
 import Router from "next/router";
@@ -9,8 +10,19 @@ Router.onRouteChangeComplete = (url) => NProgress.done();
 Router.onRouteChangeError = (url) => NProgress.done();
 
 const Layout = ({ children }) => {
+  const head = () => (
+    <Head>
+      <script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"
+      ></script>
+    </Head>
+  );
+
   const nav = () => (
     <>
+      {head()}
       <ul className="nav nav-tabs bg-primary variant-dark non-mobile-nav">
         <li className="nav-item">
           <Link href="/">

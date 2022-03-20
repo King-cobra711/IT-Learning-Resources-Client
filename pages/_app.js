@@ -1,6 +1,5 @@
 import "../styles/globals.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "bootstrap/js/src/collapse.js";
 import "nprogress/nprogress.css";
 
 function MyApp({ Component, pageProps }) {
