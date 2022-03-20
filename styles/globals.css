@@ -132,12 +132,21 @@ a {
   box-shadow: 0 8px 8px -4px rgb(153, 153, 153);
 }
 
-@media screen and (max-width: 767px) {
-  .category-box {
-    margin-bottom: 8px;
-  }
+.category-box {
+  margin-bottom: 8px;
 }
 
+@media screen and (max-width: 1193px) {
+  .display-4.font-weigth-bold {
+    text-align: center;
+  }
+}
+@media screen and (max-width: 425px) {
+  .category-image-sm {
+    width: 350px;
+    height: auto;
+  }
+}
 @media screen and (min-width: 1140px) {
   #xl-posted-name {
     font-size: 0.8em;

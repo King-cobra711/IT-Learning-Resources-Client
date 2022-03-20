@@ -137,21 +137,21 @@ const Links = ({
     <>
       {head()}
       <Layout>
-        <div className="row flex-column-reverse flex-lg-row">
-          <div className="col-md-8">
+        <div className="row flex-column-reverse flex-xl-row">
+          <div className="col-lg-8 mx-auto">
             <div className="row">
               <h1 className="display-4 font-weigth-bold">{category.name}</h1>
-              <div className="lead alert alert-secondary pt-4">
+              <div className="lead alert alert-secondary">
                 {renderHTML(category.content)}
               </div>
             </div>
           </div>
-          <div className="col-md-4">
+          <div className="col-xl-4 mx-auto text-center">
             <img
               src={category.image.url}
               alt="/"
-              style={{ width: "auto", height: "200px" }}
-              className="mx-auto ms-2"
+              // style={{ width: "350px", height: "auto" }}
+              className="rounded mx-auto category-image-sm"
             />
           </div>
         </div>
