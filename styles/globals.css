@@ -12,6 +12,20 @@ a {
 }
 
 /* Nav-bar styles */
+
+.navbar.navbar-expand-lg.navbar-dark.bg-primary.mobile-nav {
+  display: none;
+}
+
+@media screen and (max-width: 500px) {
+  .navbar.navbar-expand-lg.navbar-dark.bg-primary.mobile-nav {
+    display: block;
+  }
+  .nav.nav-tabs.bg-primary.variant-dark.non-mobile-nav {
+    display: none;
+  }
+}
+
 .nav-item > a {
   border-bottom-width: 0.2em !important;
 }
