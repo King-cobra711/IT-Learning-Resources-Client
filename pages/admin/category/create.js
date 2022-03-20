@@ -48,8 +48,8 @@ const Create = ({ user, token }) => {
       try {
         Resizer.imageFileResizer(
           event.target.files[0],
-          400,
-          200,
+          300,
+          150,
           "JPEG",
           100,
           0,

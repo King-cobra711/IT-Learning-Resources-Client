@@ -61,10 +61,10 @@ const Home = ({ categories, links }) => {
 
   const listCategories = () =>
     categories.map((c, key) => (
-      <div className="col-md-4 m-2">
+      <div className="col-md-4 m-1 p-0">
         <Link href={`/links/${c.slug}`} key={key}>
           <a>
-            <div class="card category-box" style={{ width: "200px;" }}>
+            <div class="card category-box" style={{ width: "150px;" }}>
               <img class="card-img-top" src={c.image.url} alt="/" />
               <div class="card-body">
                 <h5 class="card-title text-center">{c.name}</h5>
