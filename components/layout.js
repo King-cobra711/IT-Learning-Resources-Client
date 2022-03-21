@@ -12,6 +12,12 @@ Router.onRouteChangeError = (url) => NProgress.done();
 const Layout = ({ children, update }) => {
   const head = () => (
     <Head>
+      <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+        crossorigin="anonymous"
+      ></link>
       <script
         src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
@@ -21,7 +27,7 @@ const Layout = ({ children, update }) => {
   );
 
   const nav = () => (
-    <React.Fragment>
+    <>
       {head()}
       <ul className="nav nav-tabs bg-primary variant-dark non-mobile-nav">
         <li className="nav-item">
@@ -34,7 +40,7 @@ const Layout = ({ children, update }) => {
             <a className="nav-link text-light btn btn-success">Submit a Link</a>
           </Link>
         </li>
-        {process.browser && !isAuth() && (
+        {typeof window !== "undefined" && !isAuth() && (
           <>
             <li className="nav-item">
               <Link href="/login">
@@ -48,32 +54,38 @@ const Layout = ({ children, update }) => {
             </li>
           </>
         )}
-        {process.browser && isAuth() && isAuth().role === "admin" && (
-          <li className="nav-item ms-auto">
-            <Link href="/admin">
-              <a className="nav-link text-light">
-                {update ? update.name : isAuth().name}
+        {typeof window !== "undefined" &&
+          isAuth() &&
+          isAuth().role === "admin" && (
+            <li className="nav-item ms-auto">
+              <Link href="/admin">
+                <a className="nav-link text-light">
+                  {update ? update.name : isAuth().name}
+                </a>
+              </Link>
+            </li>
+          )}
+        {typeof window !== "undefined" &&
+          isAuth() &&
+          isAuth().role === "subscriber" && (
+            <li className="nav-item ms-auto">
+              <Link href="/user">
+                <a className="nav-link text-light">
+                  {update ? update.name : isAuth().name}
+                </a>
+              </Link>
+            </li>
+          )}
+        {typeof window !== "undefined" && isAuth() && (
+          <>
+            <li className="nav-item">
+              <a onClick={logout} className="nav-link text-light">
+                Logout
               </a>
-            </Link>
-          </li>
+            </li>
+            <li className="nav-item spinner-space"></li>
+          </>
         )}
-        {process.browser && isAuth() && isAuth().role === "subscriber" && (
-          <li className="nav-item ms-auto">
-            <Link href="/user">
-              <a className="nav-link text-light">
-                {update ? update.name : isAuth().name}
-              </a>
-            </Link>
-          </li>
-        )}
-        {process.browser && isAuth() && (
-          <li className="nav-item">
-            <a onClick={logout} className="nav-link text-light">
-              Logout
-            </a>
-          </li>
-        )}
-        <li className="nav-item spinner-space"></li>
       </ul>
       <nav className="navbar navbar-expand-lg navbar-dark bg-primary mobile-nav">
         <div className="container-fluid">
@@ -101,7 +113,7 @@ const Layout = ({ children, update }) => {
                   <a className="nav-link text-light">Home</a>
                 </Link>
               </li>
-              {process.browser && !isAuth() && (
+              {!isAuth() && (
                 <>
                   <li className="nav-item">
                     <Link href="/login">
@@ -115,7 +127,7 @@ const Layout = ({ children, update }) => {
                   </li>
                 </>
               )}
-              {process.browser && isAuth() && isAuth().role === "admin" && (
+              {isAuth() && isAuth().role === "admin" && (
                 <li className="nav-item ms-auto">
                   <Link href="/admin">
                     <a className="nav-link text-light">
@@ -124,8 +136,8 @@ const Layout = ({ children, update }) => {
                   </Link>
                 </li>
               )}
-              {process.browser && isAuth() && isAuth().role === "subscriber" && (
-                <li className="nav-item ms-auto">
+              {isAuth() && isAuth().role === "subscriber" && (
+                <li className="nav-item">
                   <Link href="/user">
                     <a className="nav-link text-light">
                       {update ? update.name : isAuth().name}
@@ -133,7 +145,7 @@ const Layout = ({ children, update }) => {
                   </Link>
                 </li>
               )}
-              {process.browser && isAuth() && (
+              {isAuth() && (
                 <li className="nav-item">
                   <a onClick={logout} className="nav-link text-light">
                     Logout
@@ -157,13 +169,13 @@ const Layout = ({ children, update }) => {
           </div>
         </div>
       </nav>
-    </React.Fragment>
+    </>
   );
 
   return (
-    <React.Fragment>
+    <>
       {nav()} <div className="container pt-5 pb-5">{children}</div>
-    </React.Fragment>
+    </>
   );
 };
 
