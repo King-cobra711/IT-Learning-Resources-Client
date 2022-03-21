@@ -4,6 +4,7 @@ import axios from "axios";
 import { API } from "../../../config";
 import { showSuccessMessage, showErrorMessage } from "../../../helpers/alerts";
 import { getCookie, isAuth } from "../../../helpers/auth";
+import withUser from "../../withUser";
 
 const Create = ({ token }) => {
   // state
@@ -269,4 +270,4 @@ Create.getInitialProps = ({ req }) => {
   return { token };
 };
 
-export default Create;
+export default withUser(Create);

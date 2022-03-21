@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Head from "next/head";
 import Link from "next/link";
 import NProgress from "nprogress";
@@ -9,7 +9,7 @@ Router.onRouteChangeStart = (url) => NProgress.start();
 Router.onRouteChangeComplete = (url) => NProgress.done();
 Router.onRouteChangeError = (url) => NProgress.done();
 
-const Layout = ({ children }) => {
+const Layout = ({ children, update }) => {
   const head = () => (
     <Head>
       <script
@@ -21,7 +21,7 @@ const Layout = ({ children }) => {
   );
 
   const nav = () => (
-    <>
+    <React.Fragment>
       {head()}
       <ul className="nav nav-tabs bg-primary variant-dark non-mobile-nav">
         <li className="nav-item">
@@ -34,7 +34,7 @@ const Layout = ({ children }) => {
             <a className="nav-link text-light btn btn-success">Submit a Link</a>
           </Link>
         </li>
-        {!isAuth() && (
+        {process.browser && !isAuth() && (
           <>
             <li className="nav-item">
               <Link href="/login">
@@ -51,14 +51,18 @@ const Layout = ({ children }) => {
         {process.browser && isAuth() && isAuth().role === "admin" && (
           <li className="nav-item ms-auto">
             <Link href="/admin">
-              <a className="nav-link text-light">{isAuth().name}</a>
+              <a className="nav-link text-light">
+                {update ? update.name : isAuth().name}
+              </a>
             </Link>
           </li>
         )}
         {process.browser && isAuth() && isAuth().role === "subscriber" && (
           <li className="nav-item ms-auto">
             <Link href="/user">
-              <a className="nav-link text-light">{isAuth().name}</a>
+              <a className="nav-link text-light">
+                {update ? update.name : isAuth().name}
+              </a>
             </Link>
           </li>
         )}
@@ -73,7 +77,12 @@ const Layout = ({ children }) => {
       </ul>
       <nav className="navbar navbar-expand-lg navbar-dark bg-primary mobile-nav">
         <div className="container-fluid">
-          <h4 className="navbar-brand">IT Learning Resources</h4>
+          <Link href="/">
+            <a className="nav-link text-light">
+              <h4 className="navbar-brand">IT Learning Resources</h4>
+            </a>
+          </Link>
+
           <button
             className="navbar-toggler"
             type="button"
@@ -92,7 +101,7 @@ const Layout = ({ children }) => {
                   <a className="nav-link text-light">Home</a>
                 </Link>
               </li>
-              {!isAuth() && (
+              {process.browser && !isAuth() && (
                 <>
                   <li className="nav-item">
                     <Link href="/login">
@@ -109,14 +118,18 @@ const Layout = ({ children }) => {
               {process.browser && isAuth() && isAuth().role === "admin" && (
                 <li className="nav-item ms-auto">
                   <Link href="/admin">
-                    <a className="nav-link text-light">{isAuth().name}</a>
+                    <a className="nav-link text-light">
+                      {update ? update.name : isAuth().name}
+                    </a>
                   </Link>
                 </li>
               )}
               {process.browser && isAuth() && isAuth().role === "subscriber" && (
                 <li className="nav-item ms-auto">
                   <Link href="/user">
-                    <a className="nav-link text-light">{isAuth().name}</a>
+                    <a className="nav-link text-light">
+                      {update ? update.name : isAuth().name}
+                    </a>
                   </Link>
                 </li>
               )}
@@ -144,7 +157,7 @@ const Layout = ({ children }) => {
           </div>
         </div>
       </nav>
-    </>
+    </React.Fragment>
   );
 
   return (

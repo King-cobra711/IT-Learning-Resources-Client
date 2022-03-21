@@ -61,13 +61,13 @@ const Home = ({ categories, links }) => {
 
   const listCategories = () =>
     categories.map((c, key) => (
-      <div className="col-md-4">
-        <Link href={`/links/${c.slug}`} key={key}>
+      <div className="col-md-4" key={key}>
+        <Link href={`/links/${c.slug}`}>
           <a>
-            <div class="card category-box">
-              <img class="card-img-top" src={c.image.url} alt="/" />
-              <div class="card-body">
-                <h5 class="card-title text-center">{c.name}</h5>
+            <div className="card category-box">
+              <img className="card-img-top" src={c.image.url} alt="/" />
+              <div className="card-body">
+                <h5 className="card-title text-center">{c.name}</h5>
               </div>
             </div>
           </a>

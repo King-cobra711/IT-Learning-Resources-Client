@@ -137,11 +137,11 @@ const User = ({ user, token }) => {
                 <a className="nav-link">Submit a link</a>
               </Link>
             </li>
-            {/* <li className="nav-item">
-              <Link href="/user/link/update">
+            <li className="nav-item">
+              <Link href="/user/update">
                 <a className="nav-link">Update profile</a>
               </Link>
-            </li> */}
+            </li>
           </ul>
         </div>
         <div className="col-md-8">
